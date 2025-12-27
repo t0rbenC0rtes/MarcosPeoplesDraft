@@ -1,5 +1,7 @@
 # Updated Roadmap: marcospeoples.com
+
 ## Interactive Memorial Website for Marcos Peebles
+
 ### September 29, 1972 - December 12, 2025
 
 **Last Updated:** December 26, 2025  
@@ -29,12 +31,14 @@
 ## **Phase 1: Planning & Design** (2-3 weeks)
 
 ### 1.1 Project Definition ✅ COMPLETE
+
 - ✅ Define objectives, scope, and moderation rules
 - ✅ Identify target users and their needs
 - ✅ Set technical limits (max photos per memory, file sizes)
 - ✅ Confirm authentication approach
 
 ### 1.2 Information Architecture (NEXT)
+
 - Structure data model (memories, users, locations, media)
   - **New**: User profiles (Google OAuth vs. anonymous)
   - **New**: Authentication state management
@@ -43,6 +47,7 @@
 - Design database schema with dual authentication support
 
 ### 1.3 UX/UI Design
+
 - Create wireframes and high-fidelity mockups
 - Design system (colors, typography, components)
   - **Consider**: Memorial-appropriate color palette
@@ -57,12 +62,14 @@
 ## **Phase 2: Infrastructure Setup** (1-2 weeks)
 
 ### 2.1 Development Environment
+
 - Initialize React project with Vite
 - Configure folder structure and dev tools (ESLint, Prettier)
 - Set up Git repository
 - Install authentication libraries (Google OAuth)
 
 ### 2.2 Supabase Configuration
+
 - Create Supabase project
 - Design database schema:
   - **Users table**: id, auth_type (google/anonymous), google_id, email, name, profile_pic_url, created_at
@@ -81,6 +88,7 @@
 - Set up email notifications (Supabase Edge Functions)
 
 ### 2.3 Vercel Setup
+
 - Connect repository to Vercel
 - Configure environments (dev, staging, production)
 - Set environment variables:
@@ -94,6 +102,7 @@
 ## **Phase 3: Core Development** (4-6 weeks)
 
 ### 3.1 Frontend Foundation
+
 - Create base React component structure
 - Implement routing (React Router)
 - Set up state management (Context API or Zustand)
@@ -105,6 +114,7 @@
   - User state management
 
 ### 3.2 Authentication Components
+
 - **Google Login Component**
   - "Sign in with Google" button
   - OAuth redirect flow
@@ -123,7 +133,8 @@
   - Handle session expiration
 
 ### 3.3 Interactive Map
-- Integrate map library (Mapbox GL or Leaflet)
+
+- Integrate map library (Mapbox GL)
 - Implement geographical clustering system
 - Develop progressive zoom logic
 - Create markers/bubbles with counters
@@ -131,6 +142,7 @@
 - Color-code markers by time period (optional: 1970s, 80s, 90s, 2000s, etc.)
 
 ### 3.4 Memory Visualization
+
 - Develop detailed memory view (modal/page)
 - Create photo gallery with navigation
 - Implement text/testimony display
@@ -140,6 +152,7 @@
 - Show timestamp and authentication badge
 
 ### 3.5 Content Submission System
+
 - Create memory submission form
 - Implement map location selector (click on map)
 - Develop multi-photo upload with preview
@@ -154,6 +167,7 @@
 ## **Phase 4: Backend & Integration** (2-3 weeks)
 
 ### 4.1 API & Database
+
 - Create Supabase Edge Functions for:
   - User creation/authentication
   - Memory submission
@@ -164,6 +178,7 @@
 - **NEW**: Handle both Google and anonymous user creation
 
 ### 4.2 Media Management
+
 - Implement upload to Supabase Storage
 - Create thumbnail generation system
 - Set up CDN for images
@@ -171,6 +186,7 @@
 - Automatic compression for files > 2MB
 
 ### 4.3 Security & Validation
+
 - Implement server-side data validation
 - Configure file size and format limits
 - Add basic anti-spam protection (rate limiting)
@@ -184,6 +200,7 @@
 ## **Phase 5: Advanced Features** (2-3 weeks)
 
 ### 5.1 Enhanced UX
+
 - Add smooth animations and transitions
 - Implement search/filters:
   - By date range (based on Marcos's timeline)
@@ -198,8 +215,9 @@
 - Implement "return to map" navigation
 
 ### 5.2 Multilingual Features
+
 - **Language Detection**: Automatically detect memory language when submitted
-- **Translation System**: 
+- **Translation System**:
   - Integrate translation API (Google Translate or DeepL)
   - "Translate this memory" button on each memory
   - Translate between: English (UK), French (BE), Spanish (CL), Dutch (BE), Portuguese (BR)
@@ -211,6 +229,7 @@
   - Language-specific formatting (dates, numbers)
 
 ### 5.3 Moderator Notifications
+
 - **Email System Setup**:
   - Use Supabase Edge Functions + email service (Resend, SendGrid, or similar)
   - Template for new memory notification
@@ -222,6 +241,7 @@
   - Test notification system
 
 ### 5.4 Post-Moderation Features
+
 - **Simple reporting system**:
   - "Report this memory" button (available to all users)
   - Report reasons dropdown (inappropriate, spam, false, other)
@@ -237,6 +257,7 @@
   - Restore hidden memories
 
 ### 5.5 Social Features (optional)
+
 - Share specific memory (direct link with preview)
   - Generate shareable URL for each memory
   - Social media meta tags for rich previews
@@ -249,6 +270,7 @@
 ## **Phase 6: Optimization & Performance** (1-2 weeks)
 
 ### 6.1 Frontend Performance
+
 - Optimize bundle size:
   - Code splitting by route
   - Lazy loading components
@@ -259,6 +281,7 @@
 - Prefetch images on hover
 
 ### 6.2 Backend Performance
+
 - Optimize database queries:
   - Add composite indexes
   - Implement pagination (20 memories per load)
@@ -268,6 +291,7 @@
 - Set up CDN for static assets
 
 ### 6.3 Responsive & Accessibility
+
 - Ensure full mobile compatibility (320px - 768px)
 - Test across browsers (Chrome, Firefox, Safari, Edge)
 - Improve accessibility:
@@ -283,6 +307,7 @@
 ## **Phase 7: Testing & QA** (1-2 weeks)
 
 ### 7.1 Functionality Testing
+
 - **Authentication testing**:
   - Google OAuth flow (login, logout, session persistence)
   - Anonymous login flow
@@ -300,6 +325,7 @@
 - Reporting system
 
 ### 7.2 Performance Testing
+
 - Load testing with simulated data (500-1000 memories)
 - Map performance with clustering
 - Image loading optimization
@@ -307,6 +333,7 @@
 - Mobile network performance (3G, 4G)
 
 ### 7.3 Security Testing
+
 - Test RLS policies (users can't modify others' memories)
 - File upload restrictions
 - Rate limiting effectiveness
@@ -315,12 +342,14 @@
 - Authentication token security
 
 ### 7.4 Cross-Platform Testing
+
 - Desktop browsers (Chrome, Firefox, Safari, Edge)
 - Mobile browsers (iOS Safari, Chrome Android)
 - Tablet views (iPad, Android tablets)
 - Different screen sizes and orientations
 
 ### 7.5 User Acceptance Testing
+
 - Test with small group of family/friends
 - Gather feedback on:
   - Emotional appropriateness
@@ -334,6 +363,7 @@
 ## **Phase 8: Launch Preparation** (1 week)
 
 ### 8.1 Initial Content
+
 - Create 5-10 sample memories (with permission from family)
   - Variety of locations
   - Different time periods (1970s-2025)
@@ -350,6 +380,7 @@
   - Tips for writing meaningful memories
 
 ### 8.2 Legal & Ethics
+
 - Draft privacy policy:
   - What data we collect (Google profile data, IP addresses)
   - How data is used
@@ -366,6 +397,7 @@
 - Add legal footer links
 
 ### 8.3 Final Deployment
+
 - Production configuration on Vercel
 - Verify all environment variables
 - Configure marcospeoples.com domain:
@@ -381,6 +413,7 @@
 ## **Phase 9: Launch** (1 week)
 
 ### 9.1 Soft Launch
+
 - Deploy to production
 - Share with immediate family first (5-10 people)
 - Monitor for issues:
@@ -392,6 +425,7 @@
 - Make any urgent fixes
 
 ### 9.2 Official Launch
+
 - Announce to extended family and friends
 - Share on social media (if appropriate)
 - Send email announcement with:
@@ -402,6 +436,7 @@
 - Monitor site traffic and performance
 
 ### 9.3 Post-Launch Support
+
 - Be available for user questions
 - Monitor for any reported content
 - Address technical issues quickly
@@ -412,6 +447,7 @@
 ## **Phase 10: Maintenance** (ongoing)
 
 ### 10.1 Monitoring
+
 - Monitor errors and performance (Vercel Analytics)
 - Track Supabase usage:
   - Storage usage (images)
@@ -422,18 +458,21 @@
 - Monitor reported content (if any)
 
 ### 10.2 Content Moderation
+
 - Review any reported memories within 48 hours
 - Take action if needed (hide/delete)
 - Communicate with contributors about removed content
 - Document moderation decisions
 
 ### 10.3 Backups & Security
+
 - Verify automatic backups running (daily)
 - Test backup restoration quarterly
 - Keep dependencies updated (security patches)
 - Renew SSL certificate (automatic with Vercel)
 
 ### 10.4 Improvements
+
 - Collect ongoing user feedback
 - Implement requested features
 - Optimize based on usage patterns
@@ -460,11 +499,12 @@
 ## **Budget Estimates**
 
 ### Supabase (Database & Storage)
+
 - **Confirmed Plan**: Pro Tier - $25/month
   - **Storage**: 100 GB
   - **Bandwidth**: 250 GB/month
   - **Suitable for**: 750+ memories with aggressive compression
-- **Storage Strategy**: 
+- **Storage Strategy**:
   - Compress all images to ~1.5 MB max
   - Use WebP format where supported
   - Generate thumbnails for gallery views
@@ -473,15 +513,18 @@
   - ~300 MB - 1.5 GB storage (well within 100GB limit)
 
 ### Vercel (Hosting)
+
 - **Free Tier**: 100 GB bandwidth, unlimited requests
   - Suitable for expected traffic
 - **Expected**: Free tier sufficient for entire project lifecycle
 
 ### Domain (marcospeoples.com)
+
 - **Cost**: ~$12-15/year
 - **Registrar**: Namecheap, Google Domains, or Cloudflare
 
 ### Total Annual Cost
+
 - **Year 1**: ~$312-315 (Supabase $300 + domain $12-15)
 - **Ongoing**: ~$312/year (Supabase $300 + domain renewal)
 - **Note**: May be able to optimize to free Supabase tier if compression is aggressive enough
@@ -491,6 +534,7 @@
 ## **Technology Stack Summary**
 
 ### Frontend
+
 - **Framework**: React 18+
 - **Build Tool**: Vite
 - **Routing**: React Router v6
@@ -500,6 +544,7 @@
 - **Authentication**: Supabase Auth (Google OAuth + Anonymous)
 
 ### Backend
+
 - **Database**: Supabase (PostgreSQL)
 - **Storage**: Supabase Storage
 - **Authentication**: Supabase Auth
@@ -508,12 +553,14 @@
 - **Email**: Resend, SendGrid, or Supabase Edge Functions with SMTP
 
 ### Deployment
+
 - **Hosting**: Vercel
 - **Domain**: marcospeoples.com
 - **CDN**: Vercel Edge Network
 - **SSL**: Automatic via Vercel
 
 ### Development Tools
+
 - **Version Control**: Git + GitHub
 - **Code Quality**: ESLint, Prettier
 - **Testing**: Vitest, React Testing Library
@@ -536,15 +583,15 @@
 
 ## **Risk Mitigation**
 
-| Risk | Mitigation Strategy |
-|------|-------------------|
-| Inappropriate content posted | Reporting system + responsive moderation |
-| Site overwhelmed by traffic | Vercel auto-scales, caching strategies |
-| Storage costs exceed budget | Compress images aggressively, monitor usage |
-| Anonymous spam submissions | Rate limiting by IP, simple CAPTCHA if needed |
-| Google OAuth failures | Always offer anonymous fallback |
-| Loss of data | Automated daily backups, export functionality |
-| Domain/hosting expires | Set up auto-renewal, calendar reminders |
+| Risk                         | Mitigation Strategy                           |
+| ---------------------------- | --------------------------------------------- |
+| Inappropriate content posted | Reporting system + responsive moderation      |
+| Site overwhelmed by traffic  | Vercel auto-scales, caching strategies        |
+| Storage costs exceed budget  | Compress images aggressively, monitor usage   |
+| Anonymous spam submissions   | Rate limiting by IP, simple CAPTCHA if needed |
+| Google OAuth failures        | Always offer anonymous fallback               |
+| Loss of data                 | Automated daily backups, export functionality |
+| Domain/hosting expires       | Set up auto-renewal, calendar reminders       |
 
 ---
 
@@ -561,6 +608,6 @@
 
 ---
 
-**Document Owner**: [Your Name]  
+**Document Owner**: [Antoine Lafontaine]  
 **Last Updated**: December 26, 2025  
 **Next Review**: Start of Phase 1.2
