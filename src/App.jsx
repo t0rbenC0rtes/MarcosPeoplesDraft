@@ -1,9 +1,9 @@
 import React from "react";
 import "./App.css";
 
-import Regalon from "./components/Regalon";
-import Regalon2 from "./components/Regalon2";
-import Regalon3 from "./components/Regalon3";
+import Regalon from "./components/loader/Regalon";
+import Regalon2 from "./components/loader/Regalon2";
+import Regalon3 from "./components/loader/Regalon3";
 
 const App = () => {
   return (
