@@ -1,0 +1,200 @@
+/* Map wrapper */
+.map-wrapper {
+  width: 100%;
+  height: calc(100vh - 80px);
+  position: relative;
+}
+
+/* Map container */
+.map-container {
+  width: 100%;
+  height: 100%;
+}
+
+/* Map loading state */
+.map-loading {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-white);
+  z-index: 1000;
+}
+
+.map-loading p {
+  font-family: var(--font-family);
+  color: var(--color-black);
+}
+
+/* Memory marker */
+.memory-marker {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--color-black);
+  border: 2px solid var(--color-white);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.memory-marker img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.memory-marker .marker-icon {
+  font-size: 16px;
+}
+
+.memory-marker:hover {
+  transform: scale(1.25);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  z-index: 10;
+}
+
+.memory-marker.selected {
+  transform: scale(1.5);
+  border-color: var(--color-gray-dark);
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+/* Cluster marker */
+.marker-cluster {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--color-black);
+  border: 3px solid var(--color-white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+.marker-cluster:hover {
+  transform: scale(1.15);
+  background: #333;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+}
+
+.cluster-count {
+  color: var(--color-white);
+  font-size: 16px;
+  font-weight: 700;
+  font-family: var(--font-family);
+}
+
+/* Mapbox popup overrides */
+.mapboxgl-popup-content {
+  padding: 0;
+  border-radius: 4px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.mapboxgl-popup-tip {
+  border-top-color: var(--color-white);
+}
+
+/* Hover tooltip */
+.memory-hover-tooltip {
+  padding: 0.75rem;
+  min-width: 150px;
+  max-width: 250px;
+}
+
+.memory-hover-tooltip h4 {
+  margin: 0 0 0.25rem 0;
+  font-size: 14px;
+  font-weight: 500;
+  font-family: var(--font-family);
+  color: var(--color-black);
+}
+
+.memory-hover-tooltip p {
+  margin: 0 0 0.25rem 0;
+  font-size: 12px;
+  color: var(--color-gray-dark);
+  font-family: var(--font-family);
+}
+
+.memory-year {
+  font-size: 11px;
+  color: var(--color-gray-medium);
+  font-family: var(--font-family);
+}
+
+/* Mapbox controls styling */
+.mapboxgl-ctrl-group {
+  background: var(--color-white);
+  border: 1px solid var(--color-black);
+  box-shadow: none;
+}
+
+.mapboxgl-ctrl-group button {
+  border: none;
+  background: var(--color-white);
+}
+
+.mapboxgl-ctrl-group button:hover {
+  background: var(--color-gray-light);
+}
+
+.mapboxgl-ctrl-group button + button {
+  border-top: 1px solid var(--color-gray-light);
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+  .map-wrapper {
+    height: calc(100vh - 60px);
+  }
+
+  .memory-marker {
+    width: 28px;
+    height: 28px;
+  }
+
+  .marker-cluster {
+    width: 40px;
+    height: 40px;
+  }
+
+  .cluster-count {
+    font-size: 14px;
+  }
+
+  .memory-hover-tooltip {
+    padding: 0.5rem;
+    min-width: 120px;
+  }
+
+  .memory-hover-tooltip h4 {
+    font-size: 12px;
+  }
+
+  .memory-hover-tooltip p {
+    font-size: 11px;
+  }
+}
