@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useMemo } from "react";
 import { supabase } from "../lib/supabase";
 
 export const useMemories = (filters = {}) => {
@@ -6,9 +6,16 @@ export const useMemories = (filters = {}) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
+  // Stabilize filters object to prevent infinite re-renders
+  const stableFilters = useMemo(
+    () => JSON.stringify(filters),
+    [filters.yearStart, filters.yearEnd, filters.language, filters.tags]
+  );
+
   const fetchMemories = useCallback(async () => {
     try {
       setLoading(true);
+      const parsedFilters = JSON.parse(stableFilters);
       let query = supabase
         .from("memories")
         .select(
@@ -26,18 +33,18 @@ export const useMemories = (filters = {}) => {
         .order("created_at", { ascending: false });
 
       // Apply filters
-      if (filters.yearStart && filters.yearEnd) {
+      if (parsedFilters.yearStart && parsedFilters.yearEnd) {
         query = query
-          .gte("year", filters.yearStart)
-          .lte("year", filters.yearEnd);
+          .gte("year", parsedFilters.yearStart)
+          .lte("year", parsedFilters.yearEnd);
       }
 
-      if (filters.language) {
-        query = query.eq("language", filters.language);
+      if (parsedFilters.language) {
+        query = query.eq("language", parsedFilters.language);
       }
 
-      if (filters.tags && filters.tags.length > 0) {
-        query = query.overlaps("tags", filters.tags);
+      if (parsedFilters.tags && parsedFilters.tags.length > 0) {
+        query = query.overlaps("tags", parsedFilters.tags);
       }
 
       const { data, error } = await query;
@@ -50,7 +57,7 @@ export const useMemories = (filters = {}) => {
     } finally {
       setLoading(false);
     }
-  }, [filters]);
+  }, [stableFilters]);
 
   useEffect(() => {
     fetchMemories();
