@@ -16,7 +16,8 @@ export const useMapMemories = () => {
           id,
           title,
           location_name,
-          coordinates,
+          latitude,
+          longitude,
           year,
           time_period,
           photo_count,
@@ -28,7 +29,8 @@ export const useMapMemories = () => {
         )
         .eq("is_hidden", false)
         .eq("is_deleted", false)
-        .not("coordinates", "is", null);
+        .not("latitude", "is", null)
+        .not("longitude", "is", null);
 
       if (error) throw error;
 
@@ -42,8 +44,8 @@ export const useMapMemories = () => {
         geometry: {
           type: "Point",
           coordinates: [
-            memory.coordinates.coordinates[0], // longitude
-            memory.coordinates.coordinates[1], // latitude
+            memory.longitude, // longitude first (GeoJSON standard)
+            memory.latitude, // latitude second
           ],
         },
       }));
