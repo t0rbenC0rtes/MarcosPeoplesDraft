@@ -8,7 +8,9 @@ export default function Header() {
     <header className="header">
       <div className="container">
         <Link to="/" className="logo">
-          <h1>Marcos Peebles</h1>
+          <h1>
+            Marcos Pe<span style={{ color: "red" }}>oples</span>
+          </h1>
           <span className="subtitle">1972 - 2025</span>
         </Link>
 

@@ -1,8 +1,9 @@
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { useMemory } from "../hooks/useMemories";
 
 export default function MemoryDetailPage() {
   const { memoryId } = useParams();
+  const navigate = useNavigate();
   const { memory, loading, error } = useMemory(memoryId);
 
   if (loading) return <div>Loading memory...</div>;
@@ -11,6 +12,10 @@ export default function MemoryDetailPage() {
 
   return (
     <div className="memory-detail">
+      <button onClick={() => navigate("/")} className="btn-back">
+        ← Back to Map
+      </button>
+
       <h2>{memory.title || "Untitled Memory"}</h2>
 
       <div className="memory-meta">
