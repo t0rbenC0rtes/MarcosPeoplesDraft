@@ -1,0 +1,56 @@
+.location-picker {
+  border: 2px solid var(--color-black);
+  overflow: hidden;
+}
+
+.picker-map {
+  width: 100%;
+  height: 300px;
+  cursor: crosshair;
+}
+
+.map-loading {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 0.875rem;
+  color: var(--color-gray-dark);
+}
+
+.selected-location {
+  padding: var(--spacing-sm);
+  background: var(--color-gray-light);
+  border-top: 1px solid var(--color-black);
+}
+
+.selected-location p {
+  margin: 0;
+  font-size: 0.875rem;
+}
+
+.selected-location strong {
+  font-weight: 500;
+}
+
+/* Mapbox Geocoder overrides */
+.mapboxgl-ctrl-geocoder {
+  width: 100%;
+  max-width: none;
+  font-family: var(--font-family);
+  box-shadow: none;
+  border: none;
+  border-bottom: 2px solid var(--color-black);
+}
+
+.mapboxgl-ctrl-geocoder input {
+  font-family: var(--font-family);
+  font-size: 0.875rem;
+  padding: var(--spacing-sm);
+}
+
+@media (max-width: 768px) {
+  .picker-map {
+    height: 250px;
+  }
+}
