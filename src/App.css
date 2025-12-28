@@ -1,14 +1,379 @@
+/* ============================================
+   MARCOSPEOPLES.COM - GLOBAL STYLES
+   Black & White Minimalist Memorial Design
+   Font: Roboto Mono (monospace)
+   ============================================ */
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
+:root {
+  --color-black: #000000;
+  --color-white: #ffffff;
+  --color-gray-light: #f5f5f5;
+  --color-gray-medium: #cccccc;
+  --color-gray-dark: #666666;
+  --spacing-xs: 0.5rem;
+  --spacing-sm: 1rem;
+  --spacing-md: 1.5rem;
+  --spacing-lg: 2rem;
+  --spacing-xl: 3rem;
+  --font-family: "Roboto Mono", monospace;
+  --transition: all 0.3s ease;
+}
+
 body {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  font-family: var(--font-family);
+  background-color: var(--color-white);
+  color: var(--color-black);
+  line-height: 1.6;
   min-height: 100vh;
-  overflow: hidden; /* prevent scrollbars */
-  font-family: Roboto Mono, monospace;
+}
+
+/* ============================================
+   LAYOUT
+   ============================================ */
+
+.app-layout {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.main-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--spacing-md);
+  width: 100%;
+}
+
+/* ============================================
+   HEADER
+   ============================================ */
+
+.header {
+  background-color: var(--color-black);
+  color: var(--color-white);
+  padding: var(--spacing-md) 0;
+  border-bottom: 2px solid var(--color-black);
+}
+
+.header .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--spacing-md);
+}
+
+.logo {
+  text-decoration: none;
+  color: var(--color-white);
+}
+
+.logo h1 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin: 0;
+}
+
+.logo .subtitle {
+  font-size: 0.875rem;
+  color: var(--color-gray-medium);
+  display: block;
+  margin-top: 0.25rem;
+}
+
+.nav {
+  display: flex;
+  gap: var(--spacing-md);
+  align-items: center;
+}
+
+.nav a {
+  color: var(--color-white);
+  text-decoration: none;
+  font-size: 0.875rem;
+  transition: var(--transition);
+  padding: var(--spacing-xs) var(--spacing-sm);
+  border: 1px solid transparent;
+}
+
+.nav a:hover {
+  border-color: var(--color-white);
+}
+
+.btn-text {
+  background: none;
+  border: 1px solid var(--color-white);
+  color: var(--color-white);
+  padding: var(--spacing-xs) var(--spacing-sm);
+  font-family: var(--font-family);
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.btn-text:hover {
+  background-color: var(--color-white);
+  color: var(--color-black);
+}
+
+.user-badge {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  font-size: 0.875rem;
+}
+
+.avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--color-white);
+}
+
+.avatar-placeholder {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background-color: var(--color-gray-dark);
+  color: var(--color-white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 0.875rem;
+  border: 2px solid var(--color-white);
+}
+
+/* ============================================
+   FOOTER
+   ============================================ */
+
+.footer {
+  background-color: var(--color-black);
+  color: var(--color-white);
+  padding: var(--spacing-lg) 0;
+  text-align: center;
+  border-top: 2px solid var(--color-black);
+  margin-top: auto;
+}
+
+.footer p {
+  font-size: 0.875rem;
+  color: var(--color-gray-medium);
+  margin: 0.25rem 0;
+}
+
+/* ============================================
+   LOGIN PAGE
+   ============================================ */
+
+.login-page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: calc(100vh - 200px);
+  padding: var(--spacing-lg) var(--spacing-md);
+}
+
+.login-container {
+  max-width: 450px;
+  width: 100%;
+  border: 2px solid var(--color-black);
+  padding: var(--spacing-xl);
+  background-color: var(--color-white);
+}
+
+.login-container h2 {
+  font-size: 1.75rem;
+  font-weight: 700;
+  margin-bottom: var(--spacing-sm);
+  text-align: center;
+}
+
+.login-container > p {
+  text-align: center;
+  color: var(--color-gray-dark);
+  margin-bottom: var(--spacing-lg);
+  font-size: 0.875rem;
+}
+
+.login-methods {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+}
+
+/* Google Sign-In Button */
+.btn-google {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-sm);
+  padding: var(--spacing-md);
+  background-color: var(--color-white);
+  border: 2px solid var(--color-black);
+  font-family: var(--font-family);
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.btn-google:hover:not(:disabled) {
+  background-color: var(--color-black);
+  color: var(--color-white);
+}
+
+.btn-google:hover:not(:disabled) svg path {
+  filter: invert(1);
+}
+
+.btn-google:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Divider */
+.divider {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  margin: var(--spacing-md) 0;
+  color: var(--color-gray-dark);
+  font-size: 0.875rem;
+}
+
+.divider::before,
+.divider::after {
+  content: "";
+  flex: 1;
+  border-bottom: 1px solid var(--color-gray-medium);
+}
+
+.divider span {
+  padding: 0 var(--spacing-sm);
+}
+
+/* Anonymous Login Form */
+.login-methods form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+}
+
+.login-methods label {
+  font-size: 0.875rem;
+  font-weight: 500;
+  margin-bottom: var(--spacing-xs);
+  display: block;
+}
+
+.login-methods input[type="text"] {
+  width: 100%;
+  padding: var(--spacing-md);
+  border: 2px solid var(--color-black);
+  background-color: var(--color-white);
+  font-family: var(--font-family);
+  font-size: 0.875rem;
+  transition: var(--transition);
+}
+
+.login-methods input[type="text"]:focus {
+  outline: none;
+  background-color: var(--color-gray-light);
+}
+
+.login-methods input[type="text"]:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.btn-primary {
+  width: 100%;
+  padding: var(--spacing-md);
+  background-color: var(--color-black);
+  color: var(--color-white);
+  border: 2px solid var(--color-black);
+  font-family: var(--font-family);
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.btn-primary:hover:not(:disabled) {
+  background-color: var(--color-white);
+  color: var(--color-black);
+}
+
+.btn-primary:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.login-note {
+  text-align: center;
+  font-size: 0.75rem;
+  color: var(--color-gray-dark);
+  margin-top: var(--spacing-md);
+  line-height: 1.5;
+}
+
+/* ============================================
+   LOADING STATES
+   ============================================ */
+
+.loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 200px;
+  font-size: 0.875rem;
+  color: var(--color-gray-dark);
+}
+
+.auth-callback {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: calc(100vh - 200px);
+  font-size: 0.875rem;
+  color: var(--color-gray-dark);
+}
+
+/* ============================================
+   RESPONSIVE DESIGN
+   ============================================ */
+
+@media (max-width: 768px) {
+  .header .container {
+    flex-direction: column;
+    gap: var(--spacing-sm);
+  }
+
+  .nav {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .login-container {
+    padding: var(--spacing-lg);
+  }
+
+  .logo h1 {
+    font-size: 1.25rem;
+  }
 }
