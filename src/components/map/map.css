@@ -168,7 +168,7 @@
 /* Mobile adjustments */
 @media (max-width: 768px) {
   .map-wrapper {
-    height: calc(100vh - 60px);
+    height: calc(100vh - 300px);
   }
 
   .memory-marker {
