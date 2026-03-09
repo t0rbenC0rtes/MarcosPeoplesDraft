@@ -30,7 +30,7 @@ export default function MapContainer({ memories, onMarkerClick }) {
       container: mapContainer.current,
       style: "mapbox://styles/mapbox/light-v11",
       center: [4.3517, 50.8503], // Brussels
-      zoom: 0.75,
+      zoom: 1.75,
       minZoom: 0.75,
       maxZoom: 18,
       projection: "globe",

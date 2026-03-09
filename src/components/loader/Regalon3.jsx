@@ -14,8 +14,6 @@ const Regalon3 = () => {
           3000,
           "loading memories...",
           1000,
-          "recalling best jokes...",
-          1000,
           "dynamizing eyebrows...",
           1000,
         ]}
