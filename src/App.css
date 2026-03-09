@@ -111,6 +111,31 @@ body {
   border-color: var(--color-white);
 }
 
+.search-container {
+  position: relative;
+}
+
+.search-bar {
+  background-color: rgba(255, 255, 255, 0.1);
+  border: 1px solid var(--color-white);
+  color: var(--color-white);
+  padding: var(--spacing-xs) var(--spacing-sm);
+  font-family: var(--font-family);
+  font-size: 0.875rem;
+  width: 250px;
+  transition: var(--transition);
+  outline: none;
+}
+
+.search-bar::placeholder {
+  color: var(--color-gray-medium);
+}
+
+.search-bar:focus {
+  background-color: rgba(255, 255, 255, 0.15);
+  border-color: var(--color-white);
+}
+
 .btn-text {
   background: none;
   border: 1px solid var(--color-white);
@@ -389,6 +414,11 @@ body {
   .nav {
     flex-wrap: wrap;
     justify-content: center;
+  }
+
+  .search-bar {
+    width: 100%;
+    min-width: 200px;
   }
 
   .login-container {

@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route, Navigate, useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { AuthProvider } from "./contexts/AuthContext";
+import { SearchProvider } from "./contexts/SearchContext";
 import { useAuth } from "./hooks/useAuth";
 import Layout from "./components/layout/Layout";
 import MapPage from "./pages/MapPage";
@@ -77,7 +78,9 @@ function App() {
   return (
     <BrowserRouter>
       <AuthProvider>
-        <AppContent />
+        <SearchProvider>
+          <AppContent />
+        </SearchProvider>
       </AuthProvider>
     </BrowserRouter>
   );

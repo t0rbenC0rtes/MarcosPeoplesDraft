@@ -1,8 +1,9 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useMemo } from "react";
 import { supabase } from "../lib/supabase";
 
-export const useMapMemories = () => {
+export const useMapMemories = (searchTerm = "") => {
   const [memories, setMemories] = useState([]);
+  const [allMemories, setAllMemories] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -21,6 +22,10 @@ export const useMapMemories = () => {
           year,
           time_period,
           photo_count,
+          tags,
+          user:users (
+            name
+          ),
           media (
             thumbnail_url,
             file_url
@@ -50,6 +55,7 @@ export const useMapMemories = () => {
         },
       }));
 
+      setAllMemories(geoJsonPoints);
       setMemories(geoJsonPoints);
     } catch (err) {
       setError(err.message);
@@ -62,6 +68,36 @@ export const useMapMemories = () => {
   useEffect(() => {
     fetchMemories();
   }, [fetchMemories]);
+
+  // Filter memories based on search term
+  const filteredMemories = useMemo(() => {
+    if (!searchTerm || searchTerm.trim() === "") {
+      return allMemories;
+    }
+
+    const searchLower = searchTerm.toLowerCase().trim();
+    const searchWords = searchLower.split(/\s+/);
+
+    return allMemories.filter((point) => {
+      const memory = point.properties.memory;
+      const searchableText = [
+        memory.title || "",
+        memory.user?.name || "",
+        memory.location_name || "",
+        memory.year?.toString() || "",
+        ...(memory.tags || []),
+      ]
+        .join(" ")
+        .toLowerCase();
+
+      // Check if all search words are present in the searchable text
+      return searchWords.every((word) => searchableText.includes(word));
+    });
+  }, [allMemories, searchTerm]);
+
+  useEffect(() => {
+    setMemories(filteredMemories);
+  }, [filteredMemories]);
 
   const refresh = () => fetchMemories();
 

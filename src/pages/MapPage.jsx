@@ -2,10 +2,12 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import MapContainer from "../components/map/MapContainer";
 import { useMapMemories } from "../hooks/useMapMemories";
+import { useSearch } from "../contexts/SearchContext";
 
 export default function MapPage() {
   const navigate = useNavigate();
-  const { memories, loading, error } = useMapMemories();
+  const { searchTerm } = useSearch();
+  const { memories, loading, error } = useMapMemories(searchTerm);
   const [selectedMemory, setSelectedMemory] = useState(null);
 
   const handleMarkerClick = (memory) => {

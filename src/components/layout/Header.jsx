@@ -1,8 +1,19 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../hooks/useAuth";
+import { useSearch } from "../../contexts/SearchContext";
 
 export default function Header() {
   const { user, signOut, isAuthenticated } = useAuth();
+  const { searchTerm, setSearchTerm } = useSearch();
+  const navigate = useNavigate();
+
+  const handleSearchChange = (e) => {
+    setSearchTerm(e.target.value);
+    // Navigate to map page when searching
+    if (window.location.pathname !== "/") {
+      navigate("/");
+    }
+  };
 
   return (
     <header className="header">
@@ -15,6 +26,15 @@ export default function Header() {
         </Link>
 
         <nav className="nav">
+          <div className="search-container">
+            <input
+              type="text"
+              className="search-bar"
+              placeholder="Filter memories..."
+              value={searchTerm}
+              onChange={handleSearchChange}
+            />
+          </div>
           <Link to="/">Map</Link>
           <Link to="/share">Share Memory</Link>
 
