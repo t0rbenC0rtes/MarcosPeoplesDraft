@@ -29,8 +29,8 @@ export default function ShareMemoryPage() {
     const newErrors = {};
 
     // Story validation
-    if (!story || story.trim().length < 10) {
-      newErrors.story = "Story must be at least 10 characters";
+    if (!story || story.trim().length < 3) {
+      newErrors.story = "Story must be at least 3 characters";
     }
     if (story.length > 10000) {
       newErrors.story = "Story cannot exceed 10,000 characters";
