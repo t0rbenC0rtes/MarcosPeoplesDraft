@@ -49,6 +49,11 @@
   align-items: center;
   flex-direction: column;
   gap: 3rem;
+  font-size: 2em;
+  margin-top: 2rem;
+  @media (max-width: 600px) {
+    font-size: 1em;
+  }
 }
 
 #logo3 {
