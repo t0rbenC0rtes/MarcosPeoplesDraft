@@ -60,6 +60,14 @@ function AppContent() {
           }
         />
         <Route
+          path="share/:memoryId"
+          element={
+            <ProtectedRoute>
+              <ShareMemoryPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
           path="profile"
           element={
             <ProtectedRoute>

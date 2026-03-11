@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
 import { supabase } from "../lib/supabase";
 import LocationPicker from "../components/share/LocationPicker";
@@ -10,7 +10,9 @@ import "./ShareMemoryPage.css";
 
 export default function ShareMemoryPage() {
   const navigate = useNavigate();
+  const { memoryId } = useParams();
   const { user } = useAuth();
+  const isEditMode = Boolean(memoryId);
 
   // Form state
   const [title, setTitle] = useState("");
@@ -22,7 +24,68 @@ export default function ShareMemoryPage() {
 
   // UI state
   const [submitting, setSubmitting] = useState(false);
+  const [loading, setLoading] = useState(isEditMode);
   const [errors, setErrors] = useState({});
+
+  // Load existing memory if editing
+  useEffect(() => {
+    if (isEditMode && memoryId) {
+      loadMemory(memoryId);
+    }
+  }, [memoryId, isEditMode]);
+
+  const loadMemory = async (id) => {
+    try {
+      setLoading(true);
+      
+      // Fetch memory data
+      const { data: memory, error: memoryError } = await supabase
+        .from("memories")
+        .select(`
+          *,
+          media (*)
+        `)
+        .eq("id", id)
+        .single();
+
+      if (memoryError) throw memoryError;
+
+      // Check if user owns this memory
+      if (memory.user_id !== user.id) {
+        alert("You don't have permission to edit this memory.");
+        navigate("/profile");
+        return;
+      }
+
+      // Populate form fields
+      setTitle(memory.title || "");
+      setStory(memory.story || "");
+      setYear(memory.year ? memory.year.toString() : "");
+      setLocation({
+        location_name: memory.location_name,
+        latitude: memory.latitude,
+        longitude: memory.longitude,
+      });
+      setTags(memory.tags || []);
+      
+      // Map media to photos format
+      if (memory.media && memory.media.length > 0) {
+        const existingPhotos = memory.media.map((m) => ({
+          id: m.id,
+          file_url: m.file_url,
+          thumbnail_url: m.thumbnail_url,
+          display_order: m.display_order,
+        }));
+        setPhotos(existingPhotos);
+      }
+
+      setLoading(false);
+    } catch (error) {
+      console.error("Error loading memory:", error);
+      alert("Failed to load memory. Please try again.");
+      navigate("/profile");
+    }
+  };
 
   // Validation
   const validateForm = () => {
@@ -74,7 +137,6 @@ export default function ShareMemoryPage() {
 
       // Prepare memory data
       const memoryData = {
-        user_id: user.id,
         title: title.trim() || "Untitled Memory",
         story: story.trim(),
         language,
@@ -90,47 +152,78 @@ export default function ShareMemoryPage() {
         is_deleted: false,
       };
 
-      // Insert memory
-      const { data: memory, error: memoryError } = await supabase
-        .from("memories")
-        .insert(memoryData)
-        .select()
-        .single();
+      let memory;
 
-      if (memoryError) throw memoryError;
+      if (isEditMode) {
+        // Update existing memory
+        const { data, error: memoryError } = await supabase
+          .from("memories")
+          .update(memoryData)
+          .eq("id", memoryId)
+          .select()
+          .single();
 
-      // Insert photos if any
-      if (photos.length > 0) {
-        const photoInserts = photos.map((photo) => ({
-          memory_id: memory.id,
-          file_url: photo.file_url,
-          thumbnail_url: photo.thumbnail_url,
-          display_order: photo.display_order,
-        }));
+        if (memoryError) throw memoryError;
+        memory = data;
 
-        const { error: photosError } = await supabase
-          .from("media")
-          .insert(photoInserts);
+        // Handle photo updates - for simplicity, keep existing photos
+        // In a full implementation, you'd handle add/remove photos
+      } else {
+        // Create new memory
+        memoryData.user_id = user.id;
+        
+        const { data, error: memoryError } = await supabase
+          .from("memories")
+          .insert(memoryData)
+          .select()
+          .single();
 
-        if (photosError) {
-          console.error("Error inserting photos:", photosError);
+        if (memoryError) throw memoryError;
+        memory = data;
+
+        // Insert photos if any
+        if (photos.length > 0) {
+          const photoInserts = photos.map((photo) => ({
+            memory_id: memory.id,
+            file_url: photo.file_url,
+            thumbnail_url: photo.thumbnail_url,
+            display_order: photo.display_order,
+          }));
+
+          const { error: photosError } = await supabase
+            .from("media")
+            .insert(photoInserts);
+
+          if (photosError) {
+            console.error("Error inserting photos:", photosError);
+          }
         }
       }
 
-      // Success! Navigate to the new memory
+      // Success! Navigate to the memory
       navigate(`/memory/${memory.id}`);
     } catch (error) {
       console.error("Error submitting memory:", error);
-      setErrors({ submit: "Failed to create memory. Please try again." });
+      setErrors({ submit: `Failed to ${isEditMode ? 'update' : 'create'} memory. Please try again.` });
       setSubmitting(false);
     }
   };
 
+  if (loading) {
+    return (
+      <div className="share-page">
+        <p>Loading memory...</p>
+      </div>
+    );
+  }
+
   return (
     <div className="share-page">
-      <h2>Share Your Memory</h2>
+      <h2>{isEditMode ? "Edit Memory" : "Share Your Memory"}</h2>
       <p className="share-intro">
-        Share a special moment, story, or memory of Marcos Peebles.
+        {isEditMode 
+          ? "Update your memory details below."
+          : "Share a special moment, story, or memory of Marcos Peebles."}
       </p>
 
       <form onSubmit={handleSubmit} className="share-form">
@@ -237,7 +330,9 @@ export default function ShareMemoryPage() {
             className="btn-submit"
             disabled={submitting || !story || !location}
           >
-            {submitting ? "Publishing..." : "Share Memory"}
+            {submitting 
+              ? (isEditMode ? "Updating..." : "Publishing...") 
+              : (isEditMode ? "Update Memory" : "Share Memory")}
           </button>
         </div>
       </form>
