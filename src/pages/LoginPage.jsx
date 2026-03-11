@@ -23,10 +23,10 @@ export default function LoginPage() {
 
   const handleAnonymousLogin = async (e) => {
     e.preventDefault();
-    if (!name.trim()) {
-      alert("Please enter your name");
-      return;
-    }
+    // if (!name.trim()) {
+    //   alert("Please enter your name");
+    //   return;
+    // }
 
     try {
       setLoading(true);
@@ -86,7 +86,7 @@ export default function LoginPage() {
               onChange={(e) => setName(e.target.value)}
               placeholder="Enter your name"
               disabled={loading}
-              required
+              
             />
             <button type="submit" disabled={loading} className="btn-primary">
               Continue Anonymously

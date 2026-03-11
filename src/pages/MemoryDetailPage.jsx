@@ -39,7 +39,7 @@ export default function MemoryDetailPage() {
 
       <div className="memory-header">
         <div className="memory-author">
-          <div className="author-avatar">
+          {/* <div className="author-avatar">
             {memory.user.profile_pic_url ? (
               <img src={memory.user.profile_pic_url} alt={memory.user.name} />
             ) : (
@@ -47,14 +47,14 @@ export default function MemoryDetailPage() {
                 {memory.user.name.charAt(0).toUpperCase()}
               </div>
             )}
-          </div>
+          </div> */}
           <div className="author-info">
             <h3>{memory.user.name}</h3>
-            <div className="author-badge">
+            {/* <div className="author-badge">
               <span className={`badge badge-${authBadge.type.toLowerCase()}`}>
                 {authBadge.icon} {authBadge.type}
               </span>
-            </div>
+            </div> */}
           </div>
         </div>
 
