@@ -1,0 +1,11 @@
+.profile-page {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: var(--spacing-lg);
+	padding: var(--spacing-lg);
+}
+
+.memory-card {
+    margin-top: 1rem;
+}

@@ -1,5 +1,6 @@
 import { useAuth } from "../hooks/useAuth";
 import { useMemories } from "../hooks/useMemories";
+import "./ProfilePage.css";
 
 export default function ProfilePage() {
 	const { user } = useAuth();
@@ -20,7 +21,7 @@ export default function ProfilePage() {
 			</div>
 
 			<div className="profile-memories">
-				<h3>Your Memories ({userMemories.length})</h3>
+				<h2>Your Memories ({userMemories.length})</h2>
 
 				{loading ? (
 					<p>Loading...</p>
@@ -30,7 +31,7 @@ export default function ProfilePage() {
 					<div className="memories-grid">
 						{userMemories.map((memory) => (
 							<div key={memory.id} className="memory-card">
-								<h4>{memory.title || "Untitled"}</h4>
+								<h3>{memory.title || "Untitled"}</h3>
 								<p>{memory.location_name}</p>
 								{memory.year && <p>{memory.year}</p>}
 							</div>
