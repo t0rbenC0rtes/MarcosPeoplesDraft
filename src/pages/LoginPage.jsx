@@ -95,8 +95,8 @@ export default function LoginPage() {
         </div>
 
         <p className="login-note">
-          Anonymous contributions are stored for 30 days. Sign in with Google
-          for permanent access.
+          Anonymous contributions are permanent but cannot be edited or deleted. Sign in with Google
+          for full access.
         </p>
       </div>
     </div>
